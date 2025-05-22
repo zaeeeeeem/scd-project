@@ -23,6 +23,6 @@ def login_page():
     tk.Button(root, text="Login", width=20).pack(pady=20)
 
     
-    tk.Button(root, text="SignUp", command=open_signup_page, width=20).pack()
+    tk.Button(root, text="test", command=open_signup_page, width=30).pack()
 
     root.mainloop()
