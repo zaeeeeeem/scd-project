@@ -5,6 +5,11 @@ def login_page():
     root.title("Login - Hospital System")
     root.geometry("500x500")
 
+    def open_signup_page():
+        root.destroy()
+        from .signup import signup_page
+        signup_page()
+
     tk.Label(root, text="Login", font=("Arial", 18, "bold")).pack(pady=20)
 
     tk.Label(root, text="Email").pack()
@@ -16,6 +21,6 @@ def login_page():
     password_entry.pack()
 
     tk.Button(root, text="Login", width=20).pack(pady=20)
-    tk.Button(root, text="SignUp", width=20).pack()
+    tk.Button(root, text="SignUp", command=open_signup_page, width=20).pack()
 
     root.mainloop()
