@@ -1,13 +1,13 @@
 import tkinter as tk
-from appointment import AppointmentPage
-from medical_records import MedicalRecordsPage
-from profile import ProfilePage
+from .appointment import AppointmentPage
+from .medical_records import MedicalRecordsPage
+from .profilee import ProfilePage
 
 class Dashboard(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Patient Dashboard")
-        self.geometry("400x400")
+        self.geometry("500x500")
 
         self.container = tk.Frame(self)
         self.container.pack(fill="both", expand=True)
@@ -37,6 +37,7 @@ class MainMenu(tk.Frame):
         tk.Button(self, text="Book Appointment",width=17, command=lambda: controller.show_frame("AppointmentPage")).pack(pady=10)
         tk.Button(self, text="View Medical Records",width=17, command=lambda: controller.show_frame("MedicalRecordsPage")).pack(pady=10)
 
-if __name__ == "__main__":
-    app = Dashboard()
-    app.mainloop()
+
+def patient_dashboard():
+        app = Dashboard()
+        app.mainloop()

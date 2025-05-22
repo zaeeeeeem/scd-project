@@ -1,11 +1,13 @@
 import tkinter as tk
 from tkinter import messagebox
-from app.services.auth import login_user  # 👈 Make sure this path matches your structure
+from .Patient.dashboard import patient_dashboard
+from .Admin.dashboard import admin_dashboard
+from app.services.auth import login_user
 
 def login_page():
     root = tk.Tk()
     root.title("Login - Hospital System")
-    root.geometry("500x400")
+    root.geometry("500x500")
 
     def handle_login():
         email = email_entry.get()
@@ -17,10 +19,10 @@ def login_page():
             messagebox.showinfo("Success", f"Welcome {result['full_name']}!")
             root.destroy()
             # Example: redirect based on role
-            # if result['role_id'] == 1:
-            #     open_admin_dashboard()
-            # elif result['role_id'] == 2:
-            #     open_doctor_dashboard()
+            if result['role_id'] == 1:
+                patient_dashboard()
+            elif result['role_id'] == 3:
+                admin_dashboard()
             # else:
             #     open_patient_dashboard()
         else:
