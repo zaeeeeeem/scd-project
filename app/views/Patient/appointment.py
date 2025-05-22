@@ -5,28 +5,47 @@ class AppointmentPage(tk.Frame):
         super().__init__(parent)
         self.controller = controller
 
-        tk.Label(self, text="Book Appointment").pack(pady=10)
+        tk.Label(self, text="Book Appointment", font=("Arial", 14, "bold")).pack(pady=10)
 
+        # Patient Name
         tk.Label(self, text="Patient Name").pack()
         self.name_entry = tk.Entry(self)
         self.name_entry.pack()
 
+        # Age
         tk.Label(self, text="Age").pack()
         self.age_entry = tk.Entry(self)
         self.age_entry.pack()
 
-        tk.Label(self, text="Select Doctor / Department").pack()
-        self.doctor_entry = tk.Entry(self)
-        self.doctor_entry.pack()
+        # Department Dropdown
+        tk.Label(self, text="Department").pack()
+        self.department_var = tk.StringVar()
+        self.department_var.set("Select")
+        departments = ["Cardiology", "Neurology", "Dermatology", "Orthopedics"]
+        tk.OptionMenu(self, self.department_var, *departments).pack()
 
-        tk.Label(self, text="Reason for Visit").pack()
-        self.reason_entry = tk.Entry(self)
-        self.reason_entry.pack()
+        # Doctor Dropdown
+        tk.Label(self, text="Doctor").pack()
+        self.doctor_var = tk.StringVar()
+        self.doctor_var.set("Select")
+        doctors = ["Dr. Ahsan", "Dr. Fatima", "Dr. Usama", "Dr. Iqra"]
+        tk.OptionMenu(self, self.doctor_var, *doctors).pack()
 
-        tk.Button(self, text="Submit", command=self.book_appointment).pack(pady=10)
+        # Submit Button
+        tk.Button(self, text="Submit",width=17, command=self.submit_appointment).pack(pady=10)
 
-        tk.Button(self, text="Back", command=lambda: controller.show_frame("MainMenu")).pack()
+        # Back Button
+        tk.Button(self, text="Back",width=17, command=lambda: controller.show_frame("MainMenu")).pack(pady=10)
 
-    def book_appointment(self):
-        # Placeholder for saving logic
-        print("Appointment booked (simulation)")
+    def submit_appointment(self):
+        name = self.name_entry.get()
+        age = self.age_entry.get()
+        department = self.department_var.get()
+        doctor = self.doctor_var.get()
+
+        print("---- Appointment Details ----")
+        print(f"Patient Name: {name}")
+        print(f"Age: {age}")
+        print(f"Department: {department}")
+        print(f"Doctor: {doctor}")
+        print("------------------------------")

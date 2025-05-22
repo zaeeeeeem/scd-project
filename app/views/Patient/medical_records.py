@@ -1,5 +1,4 @@
 import tkinter as tk
-from tkinter import ttk
 
 class MedicalRecordsPage(tk.Frame):
     def __init__(self, parent, controller):
@@ -8,31 +7,37 @@ class MedicalRecordsPage(tk.Frame):
 
         tk.Label(self, text="Medical Records", font=("Arial", 14, "bold")).pack(pady=10)
 
-        # Treeview for tabular records
-        columns = ("name", "email", "department", "bill")
-        tree = ttk.Treeview(self, columns=columns, show="headings")
+        # Container for table
+        table_frame = tk.Frame(self)
+        table_frame.pack()
 
-        # Define headings
-        tree.heading("name", text="Name")
-        tree.heading("email", text="Email")
-        tree.heading("department", text="Department")
-        tree.heading("bill", text="Bill")
+        # Table Headers
+        headers = ["Name", "Age", "Department", "Doctor"]
+        for col, header in enumerate(headers):
+            label = tk.Label(table_frame, text=header, width=15, borderwidth=1, relief="solid", anchor="center")
+            label.grid(row=0, column=col)
 
-        # Define column widths
-        tree.column("name", width=100)
-        tree.column("email", width=150)
-        tree.column("department", width=120)
-        tree.column("bill", width=80)
-
-        # Insert dummy records
-        dummy_data = [
-            ("Usama", "usama@example.com", "Cardiology", "$1000"),
-            ("Ali", "ali@example.com", "Orthopedics", "$750"),
-            ("Sara", "sara@example.com", "ENT", "$500")
+        # Sample records
+        self.records = [
+            {"name": "Ali", "age": "30", "department": "Cardiology", "doctor": "Dr. Ahsan"},
+            {"name": "Sara", "age": "25", "department": "Dermatology", "doctor": "Dr. Fatima"},
+            {"name": "Usman", "age": "40", "department": "Neurology", "doctor": "Dr. Usama"},
         ]
-        for record in dummy_data:
-            tree.insert("", tk.END, values=record)
 
-        tree.pack(pady=10)
+        # Show data in rows
+        for row_num, record in enumerate(self.records, start=1):
+            tk.Label(table_frame, text=record["name"], width=15, borderwidth=1, relief="solid").grid(row=row_num, column=0)
+            tk.Label(table_frame, text=record["age"], width=15, borderwidth=1, relief="solid").grid(row=row_num, column=1)
+            tk.Label(table_frame, text=record["department"], width=15, borderwidth=1, relief="solid").grid(row=row_num, column=2)
+            tk.Label(table_frame, text=record["doctor"], width=15, borderwidth=1, relief="solid").grid(row=row_num, column=3)
 
+            # Print to console
+            print("---- Record ----")
+            print(f"Name: {record['name']}")
+            print(f"Age: {record['age']}")
+            print(f"Department: {record['department']}")
+            print(f"Doctor: {record['doctor']}")
+            print("----------------")
+
+        # Back Button
         tk.Button(self, text="Back", command=lambda: controller.show_frame("MainMenu")).pack(pady=10)
