@@ -17,6 +17,8 @@ def signup_page():
         if success:
             messagebox.showinfo("Success", msg)
             root.destroy()
+            from .login import login_page
+            login_page()
         else:
             messagebox.showerror("Error", msg)
             
