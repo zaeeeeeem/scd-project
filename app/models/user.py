@@ -51,3 +51,27 @@ def insert_admin(user_id):
             conn.commit()
     finally:
         conn.close()
+
+
+
+
+
+
+
+
+
+
+
+
+#######################################################################################
+
+from app import get_db_connection
+
+def get_user_by_email(email):
+    conn = get_db_connection()
+    try:
+        with conn.cursor() as cursor:
+            cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+            return cursor.fetchone()
+    finally:
+        conn.close()
