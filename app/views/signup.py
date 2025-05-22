@@ -1,10 +1,25 @@
 import tkinter as tk
+from tkinter import messagebox
+from app.services.auth import register_user  # 👈 import your logic
 
 def signup_page():
     root = tk.Tk()
     root.title("Sign Up - Hospital System")
     root.geometry("500x500")
 
+    def handle_register():
+        username = username_entry.get()
+        email = email_entry.get()
+        password = password_entry.get()
+        user_role = user_type.get()
+
+        success, msg = register_user(username, email, password, user_role)
+        if success:
+            messagebox.showinfo("Success", msg)
+            root.destroy()
+        else:
+            messagebox.showerror("Error", msg)
+            
     def open_login_page():
         root.destroy()
         from .login import login_page
@@ -33,7 +48,7 @@ def signup_page():
     tk.Radiobutton(root, text="Doctor", variable=user_type, value="Doctor").pack()
     tk.Radiobutton(root, text="Patient", variable=user_type, value="Patient").pack()
 
-    tk.Button(root, text="Register", width=20).pack(pady=20)
+    tk.Button(root, text="Register", width=20, command=handle_register).pack(pady=20)
     tk.Button(root, text="Login", command=open_login_page, width=20).pack()
 
     root.mainloop()
