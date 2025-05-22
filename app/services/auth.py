@@ -1,5 +1,6 @@
 import hashlib
 from app.models import user
+from app.views.doctor.dashboard import DoctorDashboard
 
 def register_user(full_name, email, password, role_name):
     # Hash the password
@@ -41,3 +42,13 @@ def login_user(email, password):
 
     return True, user_data  # ✅ Return user data on success
 
+
+def login_success(user):
+    if user["role_id"] == get_role_id("Doctor"):
+        app = DoctorDashboard(user)
+        app.mainloop()
+    elif user["role_id"] == get_role_id("Patient"):
+        app = PatientDashboard(user)
+        app.mainloop()
+    else:
+        messagebox.showerror("Error", "Unknown role.")

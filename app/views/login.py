@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import messagebox
 from app.services.auth import login_user  # 👈 Make sure this path matches your structure
+from app.views.doctor.dashboard import DoctorDashboard
 
 def login_page():
     root = tk.Tk()
@@ -15,7 +16,14 @@ def login_page():
 
         if success:
             messagebox.showinfo("Success", f"Welcome {result['full_name']}!")
-            root.destroy()
+
+            if result['role_id'] == 1:
+                messagebox.showinfo("Login", "Admin dashboard not yet implemented.")
+            elif result['role_id'] == 2:
+                root.withdraw()  # or root.withdraw() if you want to reopen login later
+                DoctorDashboard(master=root, user=result)  # Pass user data if needed
+            else:
+                messagebox.showinfo("Login", "Patient dashboard not yet implemented.")
             # Example: redirect based on role
             # if result['role_id'] == 1:
             #     open_admin_dashboard()
