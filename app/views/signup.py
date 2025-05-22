@@ -5,6 +5,11 @@ def signup_page():
     root.title("Sign Up - Hospital System")
     root.geometry("500x500")
 
+    def open_login_page():
+        root.destroy()
+        from .login import login_page
+        login_page()
+
     def go_back():
         root.destroy()
 
@@ -29,5 +34,6 @@ def signup_page():
     tk.Radiobutton(root, text="Patient", variable=user_type, value="Patient").pack()
 
     tk.Button(root, text="Register", width=20).pack(pady=20)
+    tk.Button(root, text="Login", command=open_login_page, width=20).pack()
 
     root.mainloop()
