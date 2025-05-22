@@ -42,3 +42,4 @@ class DoctorDashboard(tk.Toplevel):
 
     def logout(self):
         self.destroy()
+        #destroyed
