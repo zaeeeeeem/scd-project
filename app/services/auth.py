@@ -24,3 +24,20 @@ def register_user(full_name, email, password, role_name):
         user.insert_admin(user_id)
 
     return True, "Registration successful."
+
+##################################################################################
+
+import hashlib
+from app.models import user
+
+def login_user(email, password):
+    user_data = user.get_user_by_email(email)
+    if not user_data:
+        return False, "User not found."
+
+    password_hash = hashlib.sha256(password.encode()).hexdigest()
+    if password_hash != user_data['password']:
+        return False, "Incorrect password."
+
+    return True, user_data  # ✅ Return user data on success
+
