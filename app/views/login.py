@@ -21,6 +21,8 @@ def login_page():
     password_entry.pack()
 
     tk.Button(root, text="Login", width=20).pack(pady=20)
+
+    
     tk.Button(root, text="SignUp", command=open_signup_page, width=20).pack()
 
     root.mainloop()
